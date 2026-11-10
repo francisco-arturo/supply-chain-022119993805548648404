@@ -5,10 +5,10 @@ finish a supply-chain tech website on a stack the owner can work with, with desi
 design tool. This version is the **build-first answer**: the pages and interactions exist, in plain
 files, ready to be dressed with the client's own design.
 
-- **Live URL:** not deployed yet. Deployment happens after the user approves the local build and
-  shares the repository URL.
+- **Live URL:** https://supply-chain-022119993805548648404.vercel.app
+- **Repository:** https://github.com/francisco-arturo/supply-chain-022119993805548648404
 - **Local URL:** `http://127.0.0.1:5178` (`node dev-server.mjs`)
-- **Deploy command (after approval):** `node ..\.harness\deploy.mjs supply-chain-022119993805548648404`
+- **Deploy command:** `node ..\.harness\deploy.mjs supply-chain-022119993805548648404`
 - **Last verified:** 2026-11-10
 
 ## The 60-second path
@@ -42,7 +42,7 @@ files, ready to be dressed with the client's own design.
 ## What was verified
 
 ```
-node check.mjs http://127.0.0.1:5178
+node check.mjs https://supply-chain-022119993805548648404.vercel.app
 21 passed, 0 failed
 ```
 

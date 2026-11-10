@@ -15,7 +15,7 @@
       "description": "Complete static marketing site for a fictional freight-forwarding platform. Editorial hero with a lane-network panel; feature grid; filterable live shipment board with milestone detail, escalation and tracking-link actions; instant quote builder with distance-based pricing, transit and CO2 estimate; how-it-works; 'no black box' stack section; case studies; integrations; contact form. All copy and seeded data in content.js, no framework or build step.",
       "status": "done",
       "dependencies": [],
-      "evidence": "node check.mjs http://127.0.0.1:5178 -> 21 passed, 0 failed (content, pricing maths, page wiring, stub-DOM boot, HTTP 200 for /, /styles.css, /app.js, /quote.mjs). Local server at http://127.0.0.1:5178 responded 200 with 12,335 bytes. Recorded in progress.md and DEMO.md.",
+      "evidence": "node check.mjs https://supply-chain-022119993805548648404.vercel.app -> 21 passed, 0 failed (content, pricing maths, page wiring, stub-DOM boot, HTTP 200 for /, /styles.css, /app.js, /quote.mjs). Local check 17/17. Pushed to https://github.com/francisco-arturo/supply-chain-022119993805548648404 and deployed READY in 9s at https://supply-chain-022119993805548648404.vercel.app. Recorded in progress.md and DEMO.md.",
       "done_criteria": [
         "Behavior implemented",
         ".\\init.ps1 run and its output recorded in progress.md"

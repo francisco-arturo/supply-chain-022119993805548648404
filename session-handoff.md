@@ -2,7 +2,7 @@
 
 ## Last Updated
 
-- 2026-11-10 — built and verified the Cargolane marketing site; awaiting user review.
+- 2026-11-10 — built, verified, pushed and deployed; proposal drafted.
 
 ## Current Objective
 
@@ -12,12 +12,11 @@ with one editable content file.
 
 ## Recommended Next Step
 
-1. Open `http://127.0.0.1:5178` and walk the path in `DEMO.md`.
-2. If the user approves, ask for the GitHub repository URL they created, add it to
-   `github.json` -> `approved_remotes`, push, then deploy:
-   `node .harness/deploy.mjs supply-chain-022119993805548648404`.
-3. Send the live URL back. Do not draft a proposal unless the user asks for one.
-4. `proto-002` (map the client's Claude design) starts only when the design files arrive.
+1. The live URL is `https://supply-chain-022119993805548648404.vercel.app`, verified 21/21 checks.
+2. The proposal draft is `../upwork-kit/drafts/022119993805548648404.md`, built on that URL.
+3. `proto-002` (map the client's Claude design) starts only when the design files arrive.
+4. On a real engagement, graduate the work into a new repository rather than growing this prototype
+   in place.
 
 ## Files
 
@@ -36,10 +35,12 @@ with one editable content file.
 
 - None technical. The client's Claude design files and brand assets were not supplied, so the visual
   design is derived from the brief; `proto-002` is where their design gets mapped.
+- Deployed and live; the repository is pushed.
 
 ## Next Session
 
-- Start the local server with `node dev-server.mjs` from this directory if it is not running.
-- Re-run `node check.mjs http://127.0.0.1:5178` before changing anything.
+- Live URL: `https://supply-chain-022119993805548648404.vercel.app`.
+- Re-run `node check.mjs https://supply-chain-022119993805548648404.vercel.app` before changing
+  anything.
 - Do not create a second directory for this prototype; continue in this one.
 - Retirement, if ever needed, goes through the workspace `retire-prototype.ps1`.

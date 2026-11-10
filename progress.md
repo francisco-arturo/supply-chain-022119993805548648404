@@ -9,6 +9,8 @@
   `styles.css`, rendering and interactions in `app.js`, pricing maths in `quote.mjs`.
 - Feature `proto-001` is **done**. `proto-002` records the work that needs the client's own design
   files and is deliberately not started.
+- Pushed to `https://github.com/francisco-arturo/supply-chain-022119993805548648404` and deployed to
+  `https://supply-chain-022119993805548648404.vercel.app` on 2026-11-10 (deployment `dpl_2VFjBUkgqLjodDxU9YoBAjMFg2hq`, READY in 9s).
 
 ## Current Objective
 
@@ -18,9 +20,9 @@ with one editable content file.
 
 ## Last Updated
 
-- **Last Updated**: 2026-11-10 (build session)
-- **Recommended Next Step**: user reviews `http://127.0.0.1:5178`; on approval, push to the
-  repository they create and deploy with `node .harness/deploy.mjs supply-chain-022119993805548648404`.
+- **Last Updated**: 2026-11-10 (deployed)
+- **Recommended Next Step**: proposal drafted from the live URL; deliver the link and the proposal
+  to the client. `proto-002` starts when the Claude design files arrive.
 
 ## What Ran
 
@@ -32,11 +34,16 @@ with one editable content file.
 | `Invoke-WebRequest http://127.0.0.1:5178/` | HTTP 200, 12,335 bytes |
 | `node check.mjs` | 17 passed, 0 failed |
 | `node check.mjs http://127.0.0.1:5178` | 21 passed, 0 failed |
+| `git push -u origin main` | pushed to the approved remote, branch `main` |
+| `node .harness/deploy.mjs supply-chain-022119993805548648404` | READY in 9s, live alias `https://supply-chain-022119993805548648404.vercel.app` |
+| `node check.mjs https://supply-chain-022119993805548648404.vercel.app` | 21 passed, 0 failed against production |
 | Chrome headless screenshot attempt | blocked by sandbox (`mojo platform_channel` access denied); abandoned, not retried |
 
 ## Verification Evidence
 
 ```
+$ node check.mjs https://supply-chain-022119993805548648404.vercel.app
+
 Cargolane verification
 ----------------------
   PASS  content.js loads and exposes window.CONTENT
@@ -79,10 +86,11 @@ Sample quote: Shanghai -> Rotterdam, Ocean FCL, 18,000 kg = $3,418 / 23 days
 
 ## Next
 
-1. User review at `http://127.0.0.1:5178`.
-2. On approval: add the repository URL to `github.json`, push, deploy, send the live URL.
-3. Only then: proposal, if asked.
-4. `proto-002` waits for the client's Claude design files and brand assets.
+1. Deliver the live URL and the proposal to the client (draft in
+   `../upwork-kit/drafts/022119993805548648404.md`).
+2. `proto-002` waits for the client's Claude design files and brand assets.
+3. On approval of the real project, create the production repository from this one and retire the
+   prototype through the factory scripts.
 
 ## Blockers
 
