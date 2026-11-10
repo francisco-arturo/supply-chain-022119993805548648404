@@ -1,0 +1,14 @@
+.harness/
+.harness
+.preview/
+AGENTS.md
+DEMO.md
+progress.md
+session-handoff.md
+feature_list.json
+init.ps1
+init.sh
+check.mjs
+dev-server.mjs
+*.log
+node_modules/

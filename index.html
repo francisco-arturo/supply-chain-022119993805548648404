@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cargolane — supply-chain control tower</title>
+  <meta
+    name="description"
+    content="Cargolane puts live shipment milestones, exception ownership and lane pricing on one screen. Built in plain HTML, CSS and one content file."
+  />
+  <meta name="theme-color" content="#f5f2ea" />
+  <meta property="og:title" content="Cargolane — supply-chain control tower" />
+  <meta
+    property="og:description"
+    content="Every container, every ETA, one honest screen. A working prototype of a freight tracking board and instant lane quote."
+  />
+  <meta property="og:type" content="website" />
+  <link
+    rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e5b43'/%3E%3Cpath d='M8 21l5-10 6 10 5-10' fill='none' stroke='%23d7f26b' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="scroll-progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="Cargolane, back to top">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="28" height="28" focusable="false">
+            <rect width="32" height="32" rx="7" fill="currentColor" />
+            <path d="M8 21l5-10 6 10 5-10" fill="none" stroke="#d7f26b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+        <span class="brand-name" id="brandName">Cargolane</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <div class="nav-links" id="navLinks"></div>
+        <a class="btn btn-primary btn-sm" id="navCta" href="#contact">Book a walkthrough</a>
+      </nav>
+
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-nav" id="mobileNav">
+      <div class="wrap mobile-nav-inner" id="mobileNavLinks"></div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-grid wrap">
+        <div class="hero-copy reveal">
+          <p class="eyebrow" id="heroEyebrow">Supply-chain control tower</p>
+          <h1 class="hero-title" id="heroTitle"></h1>
+          <p class="hero-lede" id="heroLede"></p>
+          <div class="hero-actions" id="heroActions"></div>
+          <p class="hero-note" id="heroNote"></p>
+        </div>
+        <aside class="hero-panel reveal" id="heroPanel" aria-label="Live network preview"></aside>
+      </div>
+
+      <div class="logo-strip wrap reveal">
+        <p class="logo-label" id="logoLabel"></p>
+        <ul class="logo-row" id="logoRow"></ul>
+      </div>
+    </section>
+
+    <section class="stats-band" aria-label="Network at a glance">
+      <div class="wrap stats-grid" id="statsGrid"></div>
+    </section>
+
+    <section class="section" id="platform">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow" id="platformEyebrow"></p>
+          <h2 id="platformTitle"></h2>
+          <p class="section-lede" id="platformBody"></p>
+        </div>
+        <div class="feature-grid" id="featureGrid"></div>
+      </div>
+    </section>
+
+    <section class="section board-section" id="board">
+      <div class="wrap">
+        <div class="section-head section-head-split">
+          <div>
+            <p class="eyebrow" id="boardEyebrow"></p>
+            <h2 id="boardTitle"></h2>
+            <p class="section-lede" id="boardBody"></p>
+          </div>
+          <p class="board-hint" id="boardHint"></p>
+        </div>
+
+        <div class="board-shell reveal">
+          <div class="board-main">
+            <div class="board-toolbar">
+              <div class="filters" id="boardFilters" role="tablist" aria-label="Filter shipments"></div>
+              <div class="board-meta"><span class="live-dot" aria-hidden="true"></span><span id="boardMeta">Seeded demo</span></div>
+            </div>
+            <div class="table-wrap">
+              <table class="ship-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Shipment</th>
+                    <th scope="col">Lane</th>
+                    <th scope="col">Mode</th>
+                    <th scope="col">ETA</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="shipmentRows"></tbody>
+              </table>
+            </div>
+            <p class="board-foot" id="boardFoot"></p>
+          </div>
+          <aside class="detail" id="shipmentDetail" aria-live="polite"></aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="quote">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow" id="quoteEyebrow"></p>
+          <h2 id="quoteTitle"></h2>
+          <p class="section-lede" id="quoteBody"></p>
+        </div>
+
+        <div class="quote-shell reveal">
+          <form class="quote-form" id="quoteForm">
+            <div class="field-pair">
+              <label class="field">
+                <span>Origin</span>
+                <select id="originSelect" name="origin"></select>
+              </label>
+              <label class="field">
+                <span>Destination</span>
+                <select id="destinationSelect" name="destination"></select>
+              </label>
+            </div>
+
+            <fieldset class="field-group">
+              <legend>Mode</legend>
+              <div class="mode-toggle" id="modeToggle"></div>
+            </fieldset>
+
+            <div class="field">
+              <label class="weight-label" for="weightInput">
+                <span>Chargeable weight</span>
+                <output id="weightOutput">18,000 kg</output>
+              </label>
+              <input id="weightRange" type="range" min="500" max="28000" step="500" value="18000" aria-label="Chargeable weight slider" />
+              <input id="weightInput" class="weight-number" type="number" min="50" max="28000" step="50" value="18000" inputmode="numeric" />
+            </div>
+
+            <fieldset class="field-group">
+              <legend>Service</legend>
+              <div class="service-options" id="serviceOptions"></div>
+            </fieldset>
+          </form>
+
+          <div class="quote-result" id="quoteResult" aria-live="polite"></div>
+        </div>
+        <p class="disclaimer" id="quoteDisclaimer"></p>
+      </div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow" id="howEyebrow"></p>
+          <h2 id="howTitle"></h2>
+          <p class="section-lede" id="howBody"></p>
+        </div>
+        <ol class="steps" id="stepList"></ol>
+      </div>
+    </section>
+
+    <section class="section stack-section" id="stack">
+      <div class="wrap stack-grid">
+        <div class="stack-copy">
+          <p class="eyebrow" id="stackEyebrow"></p>
+          <h2 id="stackTitle"></h2>
+          <p class="section-lede" id="stackBody"></p>
+          <ul class="point-list" id="stackPoints"></ul>
+        </div>
+        <div class="code-card reveal" aria-label="Content file example">
+          <div class="code-head">
+            <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span id="snippetTitle">content.js</span>
+            <span class="code-badge">editable</span>
+          </div>
+          <pre class="code-body"><code id="codeSnippet"></code></pre>
+          <p class="code-foot">Every section on this page renders from this object.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="proof">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow" id="proofEyebrow"></p>
+          <h2 id="proofTitle"></h2>
+          <p class="section-lede" id="proofBody"></p>
+        </div>
+        <div class="case-grid" id="caseGrid"></div>
+      </div>
+    </section>
+
+    <section class="integrations" aria-label="Integrations">
+      <div class="wrap integrations-inner">
+        <p class="integration-label" id="integrationLabel"></p>
+        <ul class="chips" id="integrationChips"></ul>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="wrap contact-grid">
+        <div class="contact-copy">
+          <p class="eyebrow" id="contactEyebrow"></p>
+          <h2 id="contactTitle"></h2>
+          <p class="section-lede" id="contactBody"></p>
+          <ul class="tick-list" id="contactBullets"></ul>
+          <div class="contact-lines" id="contactLines"></div>
+        </div>
+
+        <form class="contact-form reveal" id="contactForm" novalidate>
+          <div class="field-pair">
+            <label class="field">
+              <span id="labelName">Name</span>
+              <input id="contactName" name="name" type="text" autocomplete="name" required placeholder="Alex Moreau" />
+            </label>
+            <label class="field">
+              <span id="labelEmail">Work email</span>
+              <input id="contactEmail" name="email" type="email" autocomplete="email" required placeholder="alex@company.com" />
+            </label>
+          </div>
+          <div class="field-pair">
+            <label class="field">
+              <span id="labelCompany">Company</span>
+              <input id="contactCompany" name="company" type="text" autocomplete="organization" placeholder="Northwind Foods" />
+            </label>
+            <label class="field">
+              <span id="labelVolume">What are you shipping?</span>
+              <select id="contactVolume" name="volume"></select>
+            </label>
+          </div>
+          <label class="field">
+            <span id="labelMessage">What gets stuck today?</span>
+            <textarea id="contactMessage" name="message" rows="4" placeholder="Two sailings a month from Ningbo, customs holds at Rotterdam, nobody owns the follow-up."></textarea>
+          </label>
+          <div class="form-footer">
+            <button class="btn btn-primary" type="submit" id="contactSubmit">Request a walkthrough</button>
+            <p class="form-note" id="formNote"></p>
+          </div>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-top">
+      <div class="footer-brand">
+        <a class="brand brand-footer" href="#top" aria-label="Cargolane, back to top">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" width="28" height="28" focusable="false">
+              <rect width="32" height="32" rx="7" fill="currentColor" />
+              <path d="M8 21l5-10 6 10 5-10" fill="none" stroke="#d7f26b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <span class="brand-name">Cargolane</span>
+        </a>
+        <p class="footer-tagline" id="footerTagline"></p>
+      </div>
+      <div class="footer-cols" id="footerCols"></div>
+    </div>
+    <div class="wrap footer-bottom">
+      <p id="footerNote"></p>
+      <p id="footerSmallprint"></p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <noscript>
+    <div class="noscript">This prototype renders its content with JavaScript. Enable JavaScript and reload.</div>
+  </noscript>
+
+  <script src="content.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
