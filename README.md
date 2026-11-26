@@ -1,69 +1,62 @@
 # Cargolane
 
-A working supply-chain marketing site: live shipment board, milestone trails, instant lane quote,
-case studies and a contact form. Built in plain HTML, CSS and JavaScript with **one content file**,
-so the site can be edited without a framework or a CMS.
+**A supply-chain marketing site where the shipment board and the quote builder are real, not screenshots.**
 
-This is a prototype built from a job brief. Shipments, rates and case studies are seeded sample data.
+[Live demo](https://supply-chain-022119993805548648404.vercel.app) | HTML, CSS and JavaScript, no build step
 
-## Run it
+![The Cargolane home page](docs/screenshot.png)
 
-```powershell
+An editorial freight-forwarding site with a filterable shipment board, an instant quote builder, and
+a contact form that validates before it sends. All copy and demo data live in one content file, so
+the client can change the words without touching the components.
+
+## What it does
+
+- **An editorial hero** with a lane-network panel, so the network reads as a system rather than a
+  stock photo.
+- **A shipment board.** Eight seeded shipments with milestone trails, filterable by lane and status,
+  with escalation when a milestone is late.
+- **An instant quote builder.** Distance-based pricing with transit and CO2 estimates, computed from
+  the lane the visitor picks.
+- **The rest of a marketing site**: how it works, a section that explains the plain-file content
+  model, case studies, integrations, and a validated contact form.
+- **One content file.** Headlines, copy, shipments, rates and case studies all live in `content.js`.
+
+## Run it locally
+
+```bash
 node dev-server.mjs
-# http://127.0.0.1:5178
 ```
 
-No install, no build step.
-
-## Files
-
-| File | What it is |
-|---|---|
-| `content.js` | Every headline, shipment, lane rate, case study and form label |
-| `index.html` | Page structure and section mounts |
-| `styles.css` | Design tokens and all layout |
-| `app.js` | Renders `content.js` into the page and wires the interactions |
-| `quote.mjs` | Pure lane-pricing logic (shared by the page and the checks) |
-| `check.mjs` | Verification: content shape, pricing maths, page wiring |
-| `dev-server.mjs` | Local static server; excluded from deploys |
-
-## Edit the site
-
-1. Open `content.js`.
-2. Change a headline, a shipment, a case study or a rate.
-3. Refresh the page.
-
-The quote builder reads `content.quote.rates` and `content.quote.locations`. Adding a port means one
-object with a `lat` and `lon`; the distance and price are computed for you.
+Open <http://127.0.0.1:5178>. Nothing to install.
 
 ## Verify
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\init.ps1
-# or
+```bash
 node check.mjs
 ```
 
-To include live HTTP checks against a running server:
+Checks required sections, local assets, JavaScript parsing, the quote calculations and the static
+routes over HTTP.
 
-```powershell
-node check.mjs http://127.0.0.1:5178
-```
+## How it is built
 
-## Deploy
+| Path | Purpose |
+|---|---|
+| `index.html` | The whole site: hero, board, quote builder, proof sections, contact |
+| `content.js` | Every headline, shipment, rate and case study |
+| `quote.mjs` | Distance, transit and CO2 calculations |
+| `styles.css` | The visual system |
+| `app.js` | Rendering, filters, quote form and contact validation |
+| `vercel.json` | Static routing |
 
-The repository root is the deployment. On Vercel, import the repository and keep the default static
-settings, or run the workspace deploy script:
+## What is simulated
 
-```powershell
-node ..\.harness\deploy.mjs supply-chain-022119993805548648404
-```
+Sample shipments, rates and case studies only. There is no carrier API, authentication, payment or
+database. The contact form validates and confirms client-side; nothing is sent.
 
-`dev-server.mjs`, `check.mjs`, the harness files and this README are excluded by `.vercelignore`.
+## About this prototype
 
-## Notes and limits
-
-- The board is seeded; there is no carrier API behind it.
-- The quote is a deterministic estimate from a local rate table, not a carrier offer.
-- The contact form validates and shows a confirmation in the browser; nothing is sent.
-- No authentication, no database, no server-side state.
+Built as a working prototype for a real brief, then published as part of a portfolio. The interesting
+part is the shape: a marketing site whose interactive pieces call the same pricing functions a real
+integration would, with the copy separated into a file a non-developer can edit.
